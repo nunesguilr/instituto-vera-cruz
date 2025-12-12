@@ -12,11 +12,26 @@
     <!-- Carrega Tailwind CDN para classes -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Pipeline do Hugo: Compila SCSS, Minifica e Faz Fingerprint (para produção) -->
+    <!-- Pipeline do Hugo: Compila SCSS, Minifica e Faz Fingerprint (CORRIGIDO) -->
     {{- $style := resources.Get "scss/main.scss" }}
     {{- $options := (dict "targetPath" "css/style.css" "enableSourceMap" false) }}
-    {{- $style = $style | resources.ToCSS $options | resources.Minify | resources.Fingerprint }}
+
+    {{- with $style }}
+    {{- $style = . | toCSS $options }}
+    {{- $style = $style | minify | fingerprint }}
     <link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}" media="screen">
+    {{- else }}
+    <!-- MENSAGEM DE ERRO VISÍVEL: Se o SCSS não for encontrado -->
+    <style>
+        body::before {
+            content: "ERRO DE COMPILAÇÃO: Arquivo SCSS (assets/scss/main.scss) não encontrado ou falhou ao compilar.";
+            color: red;
+            display: block;
+            padding: 10px;
+            font-weight: bold;
+        }
+    </style>
+    {{- end }}
 </head>
 
 <body class="min-h-screen flex flex-col">
@@ -24,7 +39,7 @@
     {{ partial "header.html" . }}
 
     <main class="flex-grow container mx-auto p-4 md:p-8">
-        <!-- Onde o conteúdo específico da página (index.html, single.html, etc.) será inserido -->
+        <!-- Onde o conteúdo específico da página será inserido -->
         {{ block "main" . }}{{ end }}
     </main>
 
