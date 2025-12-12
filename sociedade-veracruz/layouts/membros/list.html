@@ -1,0 +1,21 @@
+{{ define "main" }}
+<div class="space-y-12 py-12">
+    <h1 class="text-4xl text-center mb-10 text-gray-800 font-bold">Membros Notáveis</h1>
+    <p class="text-center max-w-3xl mx-auto text-lg text-gray-600">
+        Conheça os acadêmicos e especialistas que impulsionam a missão da Sociedade de Vera Cruz.
+    </p>
+
+    <!-- Grade que irá exibir os cards dos membros -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 mx-auto max-w-6xl">
+        {{ $membros := .Site.Data.membros.membros }}
+        
+        {{ if $membros }}
+            {{ range $membros }}
+                {{ partial "components/member_card.html" . }}
+            {{ end }}
+        {{ else }}
+            <p class="text-center text-gray-500 col-span-full">Nenhum membro notável cadastrado ainda em data/membros.json.</p>
+        {{ end }}
+    </div>
+</div>
+{{ end }}

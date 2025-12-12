@@ -1,0 +1,21 @@
+{{ define "main" }}
+    <!-- 1. Seção de Destaque (Hero) -->
+    {{ partial "hero.html" . }}
+
+    <!-- 2. Introdução/Missão da página inicial -->
+    <section class="py-12 px-4 container mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">Nossa Missão</h2>
+        
+        <!-- Renderiza o conteúdo principal do content/_index.md -->
+        <div class="prose lg:prose-xl text-justify mx-auto max-w-4xl text-gray-700">
+            {{ .Content }}
+        </div>
+
+        <!-- Links para as principais seções (Artigos, Estudos, Membros) -->
+        <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-8 mt-10">
+            <a href="/artigos/" class="bg-blue-800 text-white py-3 px-6 rounded-lg text-center font-semibold hover:bg-blue-900 transition duration-300">Explorar Artigos</a>
+            <a href="/estudos/" class="bg-gray-200 text-blue-800 py-3 px-6 rounded-lg text-center font-semibold hover:bg-gray-300 transition duration-300 border border-blue-800">Ver Estudos</a>
+        </div>
+    </section>
+
+{{ end }}
