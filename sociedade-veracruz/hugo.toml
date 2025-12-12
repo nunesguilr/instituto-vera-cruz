@@ -1,0 +1,21 @@
+baseURL = "http://localhost:1313/"
+languageCode = "pt-br"
+title = "Sociedade de Vera Cruz"
+disableKinds = ["taxonomy", "term"] # Simplifica o build inicial
+
+[params]
+    # NOME COMPLETO DO BRANDING
+    brand_name = "Sociedade de Vera Cruz"
+    
+    # SLOGAN/DESCRIÇÃO
+    tagline = "Promoção de Artigos, Estudos e Membros Notáveis em Go."
+    
+    # Cores do Branding
+    color_primary = "#0D3E62" 
+    color_secondary = "#C3B173"
+    color_background = "#F9F9F9" 
+    color_text = "#333333"
+
+[permalinks]
+    artigos = "/artigos/:year/:slug/"
+    estudos = "/estudos/:slug/"
