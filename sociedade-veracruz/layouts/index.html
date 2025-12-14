@@ -1,21 +1,76 @@
 {{ define "main" }}
-    <!-- 1. Seção de Destaque (Hero) -->
-    {{ partial "hero.html" . }}
 
-    <!-- 2. Introdução/Missão da página inicial -->
-    <section class="py-12 px-4 container mx-auto">
-        <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">Nossa Missão</h2>
-        
-        <!-- Renderiza o conteúdo principal do content/_index.md -->
-        <div class="prose lg:prose-xl text-justify mx-auto max-w-4xl text-gray-700">
+<!-- 1. Hero Section (Destaque Principal) -->
+{{ partial "hero.html" . }}
+
+<!-- 2. Seção de Introdução e Missão (Contraste Visual) -->
+<section class="py-16 bg-white shadow-lg border-b border-gray-100">
+    <div class="container mx-auto text-center">
+        <!-- Título Principal da Missão -->
+        <h2 class="text-4xl font-extrabold mb-4 text-[#0D3E62]">Fundamentos da Vera Cruz</h2>
+        <p class="text-xl text-gray-500 max-w-3xl mx-auto mb-12">
+            Dedicamo-nos ao rigor intelectual, à pesquisa histórica e à defesa dos pilares da sociedade livre.
+        </p>
+
+        <!-- Renderiza o conteúdo principal (Missão do content/_index.md) -->
+        <div class="prose mx-auto max-w-4xl text-gray-700 text-left mb-12">
             {{ .Content }}
         </div>
 
-        <!-- Links para as principais seções (Artigos, Estudos, Membros) -->
+        <!-- Chamadas para Ação (Botões com SCSS Customizado) -->
         <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-8 mt-10">
-            <a href="/artigos/" class="bg-blue-800 text-white py-3 px-6 rounded-lg text-center font-semibold hover:bg-blue-900 transition duration-300">Explorar Artigos</a>
-            <a href="/estudos/" class="bg-gray-200 text-blue-800 py-3 px-6 rounded-lg text-center font-semibold hover:bg-gray-300 transition duration-300 border border-blue-800">Ver Estudos</a>
+            <a href="/artigos/" class="btn-primary flex items-center justify-center">
+                <i class="fas fa-book-open mr-2"></i> Explorar Artigos
+            </a>
+            <a href="/estudos/" class="btn-secondary flex items-center justify-center">
+                <i class="fas fa-graduation-cap mr-2"></i> Ver Estudos Aprofundados
+            </a>
         </div>
-    </section>
+    </div>
+</section>
+
+<!-- 3. Últimas Publicações (Novidades) -->
+<section class="py-16 bg-gray-50">
+    <div class="container mx-auto">
+        <h2 class="text-3xl font-bold mb-10 text-center text-[#0D3E62]">Últimas Publicações</h2>
+
+        <!-- Lista os 3 Artigos mais recentes -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {{ range first 3 (where .Site.RegularPages "Section" "artigos") }}
+            <a href="{{ .Permalink }}"
+                class="block p-6 bg-white rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                <h3 class="text-xl font-extrabold mb-2 text-[#0D3E62]">{{ .Title }}</h3>
+                <p class="text-sm text-gray-500 mb-3">{{ .Date.Format "02 de Janeiro, 2006" }}</p>
+                <p class="text-gray-600">{{ .Summary | plainify | truncate 150 "..." }}</p>
+                <span class="mt-4 inline-block text-[#C3B173] font-semibold text-sm">Leia Mais →</span>
+            </a>
+            {{ else }}
+            <p class="text-center text-gray-500 col-span-3">Nenhum artigo publicado ainda. Crie seu primeiro arquivo em
+                `content/artigos/`.</p>
+            {{ end }}
+        </div>
+    </div>
+</section>
+
+<!-- 4. Seção de Destaque de Membros (Visualização de cards) -->
+<section class="py-16 bg-white">
+    <div class="container mx-auto">
+        <h2 class="text-3xl font-bold mb-10 text-center text-[#0D3E62]">Membros Notáveis em Destaque</h2>
+
+        <!-- Renderiza 3 membros (dados JSON) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {{ $membros := first 3 ($.Site.Data.membros.reitores_e_colaboradores) }}
+            {{ range $membros }}
+            {{ partial "components/member_card.html" . }}
+            {{ end }}
+        </div>
+
+        <div class="text-center mt-12">
+            <a href="/membros/" class="text-[#0D3E62] font-semibold hover:underline transition duration-300 text-lg">
+                Ver todos os Membros Notáveis →
+            </a>
+        </div>
+    </div>
+</section>
 
 {{ end }}

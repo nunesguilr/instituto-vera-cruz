@@ -7,7 +7,7 @@
 
     <!-- Grade que irá exibir os cards dos membros -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 mx-auto max-w-6xl">
-        {{ $membros := .Site.Data.membros.membros }}
+        {{ $membros := .Site.Data.membros.reitores_e_colaboradores }}
         
         {{ if $membros }}
             {{ range $membros }}

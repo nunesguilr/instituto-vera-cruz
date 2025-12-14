@@ -1,15 +1,19 @@
 {{ $membro := . }}
 <div
-    class="member-card flex flex-col items-center text-center p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-xl transition duration-300">
-    <!-- Imagem de Perfil (usando placeholder com as cores de branding) -->
-    <img src="https://placehold.co/150x150/{{ .Site.Params.color_primary | substr 1 }}/ffffff?text={{ .nome | substr 0 1 | upper }}"
+    class="member-card flex flex-col items-center text-center p-6 bg-white border border-gray-100 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+
+    <!-- Imagem de Perfil (Placeholder com inicial do nome e anel de branding) -->
+    {{ $inicial := cond (and $membro.nome (ge (len $membro.nome) 1)) (slicestr $membro.nome 0 1 | upper) "?" }}
+    {{ $cor := cond .Site.Params.color_primary (substr .Site.Params.color_primary 1) "0D3E62" }}
+    <img src="https://placehold.co/150x150/{{ $cor }}/ffffff?text={{ $inicial }}"
         alt="Foto de perfil de {{ $membro.nome }}"
-        class="w-36 h-36 rounded-full object-cover mb-4 border-4 border-[#C3B173]" />
+        class="w-32 h-32 rounded-full object-cover mb-4 border-4 ring-2 ring-[#C3B173] border-white shadow-md" />
 
-    <h3 class="member-title text-2xl mb-1 text-[#0D3E62] font-semibold">{{ $membro.nome }}</h3>
+    <h3 class="member-title text-xl mb-1 text-[#0D3E62] font-extrabold">{{ $membro.nome }}</h3>
     <p class="member-role text-sm mb-3 italic text-[#C3B173]">{{ $membro.titulo }}</p>
-    <p class="text-sm text-gray-700 mb-4">{{ $membro.biografia_curta }}</p>
+    <p class="text-sm text-gray-600 mb-4">{{ $membro.biografia_curta }}</p>
 
+    <!-- Botão de Ação -->
     <a href="{{ $membro.link_externo }}" target="_blank" rel="noopener"
         class="text-xs font-semibold py-2 px-4 rounded-full border border-[#0D3E62] text-[#0D3E62] hover:bg-[#0D3E62] hover:text-white transition duration-300">
         Ver Perfil Externo

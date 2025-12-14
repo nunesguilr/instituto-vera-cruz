@@ -1,0 +1,36 @@
+{
+  "reitores_e_colaboradores": [
+    {
+      "id": "1",
+      "nome": "Guilherme Nunes",
+      "titulo": "Reitor e Analista de Fundamentos",
+      "biografia_curta": "Um dos reitores e a mente por trás da nossa investigação em História, Economia e Ciências Políticas. Dedicado a desvendar os pilares de uma sociedade livre.",
+      "link_externo": "#",
+      "imagem_perfil": "/images/membros/guilherme.jpg"
+    },
+    {
+      "id": "2",
+      "nome": "Gabriel Nestor",
+      "titulo": "Reitor e Pesquisador Social",
+      "biografia_curta": "Líder dos estudos em Antropologia e Sociologia. Busca compreender as interações humanas essenciais para a ordem social e o desenvolvimento cultural.",
+      "link_externo": "#",
+      "imagem_perfil": "/images/membros/gabriel.png"
+    },
+    {
+      "id": "3",
+      "nome": "Jandilson",
+      "titulo": "Colaborador de Música e Artes",
+      "biografia_curta": "Cantor, compositor e assistente nas questões de Música e Artes. Traz a perspectiva estética e criativa para enriquecer nossos estudos sobre cultura e beleza.",
+      "link_externo": "#",
+      "imagem_perfil": "/images/membros/jandilson.png"
+    },
+    {
+      "id": "4",
+      "nome": "Eduardo Guimarães",
+      "titulo": "Filósofo e Analista Cultural",
+      "biografia_curta": "Filósofo e analista cultural popular. Focado em conectar a filosofia clássica com as manifestações da cultura moderna e o cotidiano.",
+      "link_externo": "#",
+      "imagem_perfil": "/images/membros/eduardo.jpg"
+    }
+  ]
+}
