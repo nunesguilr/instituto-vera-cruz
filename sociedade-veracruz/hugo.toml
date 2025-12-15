@@ -8,7 +8,7 @@ disableKinds = ["taxonomy", "term"] # Simplifica o build inicial
     brand_name = "Sociedade de Vera Cruz"
     
     # SLOGAN/DESCRIÇÃO
-    tagline = "Promoção de Artigos, Estudos e Membros Notáveis em Go."
+    tagline = "idem velle, idem nolle"
     
     # Cores do Branding (Refletindo a estética Dark Classic)
     color_primary = "#8C1C1C" # Deep Red

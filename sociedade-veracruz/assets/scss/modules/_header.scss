@@ -19,17 +19,18 @@
     }
 
     &__logo {
-        font-size: 1.5rem;
-        font-weight: 700;
-        font-family: 'Times New Roman', serif; // Classic serif signature
-        color: #E7E5E4;
-        text-decoration: none;
-        letter-spacing: 0.05em;
-        transition: color $transition-fast;
+        display: flex;
+        align-items: center;
 
         &:hover {
-            color: $secondary;
+            opacity: 0.8;
         }
+    }
+
+    &__logo-img {
+        height: 3rem;
+        width: auto;
+        object-fit: contain;
     }
 
     &__nav {
@@ -38,12 +39,12 @@
         list-style: none;
 
         @include responsive(tablet) {
-            display: none; // Hiding for now, would typically toggle
+            display: none;
         }
     }
 
     &__link {
-        color: #A8A29E; // Muted text for subtle look
+        color: #A8A29E;
         text-decoration: none;
         font-weight: 500;
         font-size: 0.95rem;
@@ -53,7 +54,7 @@
         letter-spacing: 0.02em;
 
         &:hover {
-            color: $secondary; // Glows gold on hover
+            color: $secondary;
         }
 
         &--active {
