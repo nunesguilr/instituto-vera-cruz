@@ -1,0 +1,77 @@
+// =========================================
+// VARIÁVEIS E CONFIGURAÇÕES
+// =========================================
+
+// Cores do projeto
+$primary: #8C1C1C;
+
+// Cor Secundária: Ouro Envelhecido / Mostarda
+// Usado para: Bordas finas, divisores, ícones e detalhes nobres.
+$secondary: #C8AA6E; // Slightly softer, more "antique" gold
+
+// Cor de Fundo: Pergaminho (Off-White Quente)
+// Usado para: O fundo principal do site. Evita o branco puro para não cansar a vista.
+$background: #FDFBF7;
+
+// Cor de Texto: Sépia Escuro / Tinta Ferrogálica (Substitui o Preto/Cinza)
+// Usado para: Todo o corpo de texto e títulos. É mais suave e histórico que #000000.
+$text: #3D2B1F;
+
+// --- Neutros e Auxiliares (Ajustados para tons quentes) ---
+
+$white: #ffffff;
+
+// Cinza Claro (Agora é um "Bege Areia")
+// Usado para: Fundo de cards ou seções alternadas.
+$gray-light: #F2EFE9;
+
+// Cinza Médio (Agora é um "Pedra Calcária")
+// Usado para: Linhas de grade ou bordas inativas.
+$gray-medium: #D6D2C4;
+
+// Cinza Escuro (Agora é um "Marrom Café")
+// Usado para: Legendas, datas ou textos de rodapé.
+$gray-dark: #5C4B41;
+
+// Cor Extra: Floresta Negra (Sober Dark)
+// Usado para: Seções escuras com estética clássica.
+$dark-section: #1f1d1b; // Dark Warm Grey - Sober & Institutional
+$dark-sober: #141210; // Almost Black Warm - Depth without harshness
+
+// Gradientes modernos
+$gradient-primary: linear-gradient(135deg, $primary 0%, lighten($primary, 15%) 100%);
+$gradient-secondary: linear-gradient(135deg, $secondary 0%, darken($secondary, 10%) 100%);
+$gradient-hero: linear-gradient(135deg, rgba(28, 25, 23, 0.95) 0%, rgba(12, 10, 9, 0.95) 100%);
+
+// Sombras (glassmorphism style)
+$shadow-sm: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.08);
+$shadow-md: 0 0.25rem 1rem rgba(0, 0, 0, 0.12);
+$shadow-lg: 0 0.5rem 2rem rgba(0, 0, 0, 0.16);
+$shadow-xl: 0 1rem 3rem rgba(0, 0, 0, 0.20);
+
+// Breakpoints responsivos
+$mobile: 30rem;
+$tablet: 48rem;
+$desktop: 64rem;
+$wide: 80rem;
+
+// Espaçamentos
+$spacing-xs: 0.5rem;
+$spacing-sm: 1rem;
+$spacing-md: 1.5rem;
+$spacing-lg: 2rem;
+$spacing-xl: 4rem;
+$spacing-2xl: 6rem;
+$spacing-3xl: 8rem;
+
+// Transições
+$transition-fast: 0.2s ease-in-out;
+$transition-normal: 0.3s ease-in-out;
+$transition-slow: 0.5s ease-in-out;
+
+// Border radius
+$radius-sm: 0.5rem;
+$radius-md: 0.75rem;
+$radius-lg: 1rem;
+$radius-xl: 1.5rem;
+$radius-full: 999rem;

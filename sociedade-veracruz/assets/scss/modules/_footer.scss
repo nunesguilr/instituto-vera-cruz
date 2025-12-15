@@ -1,0 +1,48 @@
+// =========================================
+// FOOTER MODERNO
+// =========================================
+
+.footer {
+    background: $primary;
+    color: $white;
+    padding: $spacing-2xl 0 $spacing-md;
+    margin-top: $spacing-2xl;
+
+    &__content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(15.625rem, 1fr));
+        gap: $spacing-xl;
+        margin-bottom: $spacing-xl;
+
+        @include responsive(tablet) {
+            grid-template-columns: 1fr;
+            gap: $spacing-lg;
+        }
+    }
+
+    &__section {
+        h4 {
+            color: $secondary;
+            margin-bottom: $spacing-md;
+            font-size: 1.25rem;
+        }
+
+        p,
+        a {
+            color: rgba($white, 0.8);
+            text-decoration: none;
+            transition: color $transition-fast;
+
+            &:hover {
+                color: $white;
+            }
+        }
+    }
+
+    &__bottom {
+        text-align: center;
+        padding-top: $spacing-md;
+        border-top: 1px solid rgba($white, 0.2);
+        color: rgba($white, 0.7);
+    }
+}

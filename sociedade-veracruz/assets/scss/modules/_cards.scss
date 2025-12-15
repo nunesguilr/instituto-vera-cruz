@@ -1,0 +1,187 @@
+// =========================================
+// CARDS MODERNOS COM HOVER EFFECTS
+// =========================================
+
+.card {
+    background: $white;
+    border-radius: $radius-lg;
+    padding: $spacing-lg;
+    box-shadow: $shadow-sm;
+    transition: all $transition-normal;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba($primary, 0.1), transparent);
+        transition: left 0.5s;
+    }
+
+    &:hover {
+        @include hover-lift;
+
+        &::before {
+            left: 100%;
+        }
+    }
+
+    &__image {
+        width: 100%;
+        height: 12.5rem;
+        object-fit: cover;
+        border-radius: $radius-md;
+        margin-bottom: $spacing-md;
+    }
+
+    &__title {
+        font-size: 1.5rem;
+        margin-bottom: $spacing-sm;
+        color: $primary;
+    }
+
+    &__text {
+        color: $gray-dark;
+        margin-bottom: $spacing-md;
+    }
+
+    &--dark {
+        background: lighten($dark-sober, 3%); // Slightly lighter than bg for contrast without border
+        border: 1px solid rgba($secondary, 0.1); // Very subtle border definition
+        box-shadow: none; // Flat look for institutional feel
+
+        .card__title {
+            color: $secondary;
+        }
+
+        .card__text {
+            color: #A8A29E;
+        }
+    }
+
+    &--glass {
+        @include glass-effect;
+    }
+
+    &--gradient {
+        background: $gradient-primary;
+        color: $white;
+
+        .card__title {
+            color: $white;
+        }
+    }
+}
+
+// =========================================
+// MEMBER CARD APRIMORADO
+// =========================================
+
+@mixin classic-border {
+    border: 1px solid rgba($secondary, 0.2);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+}
+
+.member-card {
+    background: rgba(26, 22, 20, 0.6); // Dark semi-transparent
+    backdrop-filter: blur(0.3125rem); // Subtle glass
+    border-radius: 0.25rem; // Sharp, classic corners (slight round)
+    padding: $spacing-lg;
+    text-align: center;
+    transition: all $transition-normal;
+    position: relative;
+    overflow: hidden;
+    @include classic-border;
+
+    &:hover {
+        transform: translateY(-5px);
+        background: rgba(26, 22, 20, 0.8);
+        border-color: rgba($secondary, 0.5);
+        box-shadow: 0 0.625rem 1.875rem rgba(0, 0, 0, 0.5);
+
+        .member-card__image {
+            transform: scale(1.05);
+            filter: grayscale(0%); // Color on hover
+        }
+    }
+
+    &__image-wrapper {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 3/4; // Classic portrait ratio
+        margin: 0 auto $spacing-md;
+        overflow: hidden;
+        border-radius: 0.125rem;
+        border-bottom: 0.1875rem solid $secondary; // Gold accent bottom
+        background: #000;
+    }
+
+    &__image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: all 0.6s ease;
+        filter: grayscale(100%) sepia(20%); // Classic vintage look by default
+    }
+
+    &__name {
+        font-family: 'Times New Roman', serif;
+        font-size: 1.5rem;
+        color: #E7E5E4; // Off-white
+        margin-bottom: 0.25rem;
+        position: relative;
+        z-index: 1;
+        letter-spacing: 0.02em;
+    }
+
+    &__title {
+        color: $secondary;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: $spacing-md;
+        font-weight: 500;
+        position: relative;
+        z-index: 1;
+    }
+
+    &__bio {
+        color: #A8A29E;
+        font-size: 0.95rem;
+        margin-bottom: $spacing-lg;
+        line-height: 1.6;
+        position: relative;
+        z-index: 1;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    &__link {
+        display: inline-block;
+        padding: $spacing-xs $spacing-md;
+        background: transparent;
+        color: $secondary;
+        border: 1px solid rgba($secondary, 0.3);
+        border-radius: 0.125rem; // Classic boxy link
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        transition: all $transition-fast;
+        position: relative;
+        z-index: 1;
+
+        &:hover {
+            background: rgba($secondary, 0.1);
+            border-color: $secondary;
+            color: #fff;
+        }
+    }
+}

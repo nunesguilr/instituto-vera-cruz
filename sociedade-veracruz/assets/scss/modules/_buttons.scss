@@ -1,0 +1,78 @@
+// =========================================
+// BOTÕES MODERNOS
+// =========================================
+
+.btn {
+    display: inline-block;
+    padding: $spacing-sm $spacing-lg;
+    border-radius: $radius-full;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    transition: all $transition-normal;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: translate(-50%, -50%);
+        transition: width $transition-normal, height $transition-normal;
+    }
+
+    &:hover::before {
+        width: 18.75rem;
+        height: 18.75rem;
+    }
+
+    &--primary {
+        background: $gradient-primary;
+        color: $white;
+        box-shadow: $shadow-md;
+
+        &:hover {
+            transform: translateY(-0.125rem);
+            box-shadow: $shadow-lg;
+        }
+    }
+
+    &--secondary {
+        background: transparent;
+        color: $white;
+        border: 0.125rem solid $white;
+
+        &:hover {
+            background: $white;
+            color: $primary;
+        }
+    }
+
+    &--outline {
+        background: transparent;
+        color: $primary;
+        border: 1px solid $primary;
+
+        &:hover {
+            background: $primary;
+            color: $white;
+        }
+    }
+
+    &--small {
+        padding: $spacing-xs $spacing-md;
+        font-size: 0.875rem;
+    }
+
+    &--large {
+        padding: $spacing-md $spacing-xl;
+        font-size: 1.125rem;
+    }
+}

@@ -1,0 +1,63 @@
+// =========================================
+// HEADER MODERNO COM GLASSMORPHISM
+// =========================================
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    @include glass-effect;
+    transition: all $transition-normal;
+
+    &__container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: $spacing-sm $spacing-md;
+        max-width: $wide;
+        margin: 0 auto;
+    }
+
+    &__logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        font-family: 'Times New Roman', serif; // Classic serif signature
+        color: #E7E5E4;
+        text-decoration: none;
+        letter-spacing: 0.05em;
+        transition: color $transition-fast;
+
+        &:hover {
+            color: $secondary;
+        }
+    }
+
+    &__nav {
+        display: flex;
+        gap: $spacing-md;
+        list-style: none;
+
+        @include responsive(tablet) {
+            display: none; // Hiding for now, would typically toggle
+        }
+    }
+
+    &__link {
+        color: #A8A29E; // Muted text for subtle look
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.95rem;
+        padding: $spacing-xs $spacing-sm;
+        transition: color $transition-fast;
+        font-family: 'Times New Roman', serif;
+        letter-spacing: 0.02em;
+
+        &:hover {
+            color: $secondary; // Glows gold on hover
+        }
+
+        &--active {
+            color: $secondary;
+        }
+    }
+}
