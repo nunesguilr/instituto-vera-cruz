@@ -1,11 +1,7 @@
-baseURL = "/"  # O Netlify ajusta automaticamente para o domínio correto
+baseURL = "http://localhost:1313/"
 languageCode = "pt-br"
 title = "Sociedade de Vera Cruz"
 disableKinds = ["taxonomy", "term"] # Simplifica o build inicial
-
-# Configurações de build
-enableRobotsTXT = true
-enableGitInfo = false
 
 [params]
     # NOME COMPLETO DO BRANDING
@@ -13,7 +9,6 @@ enableGitInfo = false
     
     # SLOGAN/DESCRIÇÃO
     tagline = "Promoção de Artigos, Estudos e Membros Notáveis em Go."
-    description = "Sociedade dedicada à promoção de artigos, estudos e membros notáveis na área de Go e desenvolvimento."
     
     # Cores do Branding
     color_primary = "#0D3E62" 
@@ -24,16 +19,3 @@ enableGitInfo = false
 [permalinks]
     artigos = "/artigos/:year/:slug/"
     estudos = "/estudos/:slug/"
-
-# Configurações de minificação para produção
-[minify]
-  disableCSS = false
-  disableHTML = false
-  disableJS = false
-  disableJSON = false
-  disableSVG = false
-  disableXML = false
-  minifyOutput = true
-  [minify.tdewolff]
-    [minify.tdewolff.html]
-      keepWhitespace = false

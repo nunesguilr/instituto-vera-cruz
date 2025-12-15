@@ -1,21 +1,44 @@
 {{ $membro := . }}
-<div
-    class="member-card flex flex-col items-center text-center p-6 bg-white border border-gray-100 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+<div class="member-card animate-fadeInUp">
+    
+    <!-- Imagem de Perfil -->
+    <div class="member-card__image-wrapper">
+        {{ $inicial := cond (and $membro.nome (ge (len $membro.nome) 1)) (slicestr $membro.nome 0 1 | upper) "?" }}
+        {{ $cor := cond .Site.Params.color_primary (substr .Site.Params.color_primary 1) "0D3E62" }}
+        
+        {{ $foto := or $membro.foto $membro.imagem_perfil }}
+        
+        {{ if $foto }}
+            <img 
+                src="{{ $foto }}"
+                alt="Foto de perfil de {{ $membro.nome }}"
+                class="member-card__image"
+                loading="lazy"
+            />
+        {{ else }}
+            <img 
+                src="https://placehold.co/150x150/{{ $cor }}/ffffff?text={{ $inicial }}"
+                alt="Foto de perfil de {{ $membro.nome }}"
+                class="member-card__image"
+                loading="lazy"
+            />
+        {{ end }}
+    </div>
 
-    <!-- Imagem de Perfil (Placeholder com inicial do nome e anel de branding) -->
-    {{ $inicial := cond (and $membro.nome (ge (len $membro.nome) 1)) (slicestr $membro.nome 0 1 | upper) "?" }}
-    {{ $cor := cond .Site.Params.color_primary (substr .Site.Params.color_primary 1) "0D3E62" }}
-    <img src="https://placehold.co/150x150/{{ $cor }}/ffffff?text={{ $inicial }}"
-        alt="Foto de perfil de {{ $membro.nome }}"
-        class="w-32 h-32 rounded-full object-cover mb-4 border-4 ring-2 ring-[#C3B173] border-white shadow-md" />
-
-    <h3 class="member-title text-xl mb-1 text-[#0D3E62] font-extrabold">{{ $membro.nome }}</h3>
-    <p class="member-role text-sm mb-3 italic text-[#C3B173]">{{ $membro.titulo }}</p>
-    <p class="text-sm text-gray-600 mb-4">{{ $membro.biografia_curta }}</p>
-
+    <h3 class="member-card__name">{{ $membro.nome }}</h3>
+    <p class="member-card__title">{{ $membro.titulo }}</p>
+    
+    {{ if $membro.biografia_curta }}
+        <p class="member-card__bio">{{ $membro.biografia_curta }}</p>
+    {{ end }}
+    
     <!-- Botão de Ação -->
-    <a href="{{ $membro.link_externo }}" target="_blank" rel="noopener"
-        class="text-xs font-semibold py-2 px-4 rounded-full border border-[#0D3E62] text-[#0D3E62] hover:bg-[#0D3E62] hover:text-white transition duration-300">
-        Ver Perfil Externo
-    </a>
+    {{ if $membro.link_externo }}
+        <a href="{{ $membro.link_externo }}" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="member-card__link">
+            Ver Perfil Completo
+        </a>
+    {{ end }}
 </div>

@@ -1,7 +1,7 @@
 [build]
   publish = "public"
-  command = "hugo --gc --minify"
-
+  command = "hugo --gc --minify --config hugo.toml,config.production.toml"
+  
 [build.environment]
   HUGO_VERSION = "0.152.2"
   HUGO_ENV = "production"

@@ -3,72 +3,225 @@
 <!-- 1. Hero Section (Destaque Principal) -->
 {{ partial "hero.html" . }}
 
-<!-- 2. Seção de Introdução e Missão (Contraste Visual) -->
-<section class="py-16 bg-white shadow-lg border-b border-gray-100">
-    <div class="container mx-auto text-center">
+<!-- 2. Seção de Introdução e Missão -->
+<section class="py-16 bg-white">
+    <div class="container">
         <!-- Título Principal da Missão -->
-        <h2 class="text-4xl font-extrabold mb-4 text-[#0D3E62]">Fundamentos da Vera Cruz</h2>
-        <p class="text-xl text-gray-500 max-w-3xl mx-auto mb-12">
-            Dedicamo-nos ao rigor intelectual, à pesquisa histórica e à defesa dos pilares da sociedade livre.
-        </p>
+        <div class="text-center mb-xl animate-fadeInUp">
+            <h2 class="text-4xl font-extrabold mb-4 text-[#0D3E62]">
+                Fundamentos da Vera Cruz
+            </h2>
+            <p class="text-xl text-gray-500 max-w-3xl mx-auto">
+                Dedicamo-nos ao rigor intelectual, à pesquisa histórica e à defesa dos pilares da sociedade livre.
+            </p>
+        </div>
 
-        <!-- Renderiza o conteúdo principal (Missão do content/_index.md) -->
-        <div class="prose mx-auto max-w-4xl text-gray-700 text-left mb-12">
+        <!-- Renderiza o conteúdo principal -->
+        {{ if .Content }}
+        <div class="prose mx-auto max-w-4xl text-gray-700 mb-lg animate-fadeInUp">
             {{ .Content }}
         </div>
+        {{ end }}
 
-        <!-- Chamadas para Ação (Botões com SCSS Customizado) -->
-        <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-8 mt-10">
-            <a href="/artigos/" class="btn-primary flex items-center justify-center">
-                <i class="fas fa-book-open mr-2"></i> Explorar Artigos
+        <!-- Chamadas para Ação -->
+        <div class="hero__cta" style="justify-content: center; margin-top: 3rem;">
+            <a href="/artigos/" class="btn btn--primary btn--large">
+                📚 Explorar Artigos
             </a>
-            <a href="/estudos/" class="btn-secondary flex items-center justify-center">
-                <i class="fas fa-graduation-cap mr-2"></i> Ver Estudos Aprofundados
+            <a href="/estudos/" class="btn btn--outline btn--large">
+                🎓 Ver Estudos Aprofundados
             </a>
         </div>
     </div>
 </section>
 
-<!-- 3. Últimas Publicações (Novidades) -->
-<section class="py-16 bg-gray-50">
-    <div class="container mx-auto">
-        <h2 class="text-3xl font-bold mb-10 text-center text-[#0D3E62]">Últimas Publicações</h2>
+<!-- 3. Últimas Publicações -->
+<section class="py-16" style="background: linear-gradient(180deg, #F9F9F9 0%, #ffffff 100%);">
+    <div class="container">
+        <div class="text-center mb-xl">
+            <h2 style="background: linear-gradient(135deg, #0D3E62 0%, #1a5a8a 100%); 
+                       -webkit-background-clip: text; 
+                       -webkit-text-fill-color: transparent; 
+                       background-clip: text;
+                       font-size: 2.5rem;
+                       font-weight: 800;
+                       margin-bottom: 0.5rem;">
+                Últimas Publicações
+            </h2>
+            <p style="color: #666; font-size: 1.125rem;">
+                Confira nossos artigos mais recentes
+            </p>
+        </div>
 
         <!-- Lista os 3 Artigos mais recentes -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid grid--3-cols">
             {{ range first 3 (where .Site.RegularPages "Section" "artigos") }}
-            <a href="{{ .Permalink }}"
-                class="block p-6 bg-white rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
-                <h3 class="text-xl font-extrabold mb-2 text-[#0D3E62]">{{ .Title }}</h3>
-                <p class="text-sm text-gray-500 mb-3">{{ .Date.Format "02 de Janeiro, 2006" }}</p>
-                <p class="text-gray-600">{{ .Summary | plainify | truncate 150 "..." }}</p>
-                <span class="mt-4 inline-block text-[#C3B173] font-semibold text-sm">Leia Mais →</span>
-            </a>
+            <article class="card animate-fadeInUp">
+                <div style="margin-bottom: 1rem;">
+                    <span style="display: inline-block; 
+                                 padding: 0.25rem 0.75rem; 
+                                 background: rgba(195, 177, 115, 0.1); 
+                                 color: #C3B173; 
+                                 border-radius: 50px; 
+                                 font-size: 0.75rem; 
+                                 font-weight: 600;">
+                        📄 ARTIGO
+                    </span>
+                </div>
+                
+                <h3 class="card__title">
+                    <a href="{{ .Permalink }}" style="text-decoration: none; color: inherit;">
+                        {{ .Title }}
+                    </a>
+                </h3>
+                
+                <p style="color: #C3B173; font-size: 0.875rem; margin-bottom: 1rem; font-weight: 600;">
+                    📅 {{ .Date.Format "02 de Janeiro, 2006" }}
+                </p>
+                
+                <p class="card__text">
+                    {{ .Summary | plainify | truncate 150 "..." }}
+                </p>
+                
+                <a href="{{ .Permalink }}" class="btn btn--outline btn--small" style="margin-top: 1rem;">
+                    Leia Mais →
+                </a>
+            </article>
             {{ else }}
-            <p class="text-center text-gray-500 col-span-3">Nenhum artigo publicado ainda. Crie seu primeiro arquivo em
-                `content/artigos/`.</p>
+            <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+                <p style="color: #666; font-size: 1.125rem;">
+                    📝 Nenhum artigo publicado ainda. Crie seu primeiro arquivo em <code style="background: #f5f5f5; padding: 0.25rem 0.5rem; border-radius: 4px;">content/artigos/</code>
+                </p>
+            </div>
             {{ end }}
+        </div>
+
+        {{ if ge (len (where .Site.RegularPages "Section" "artigos")) 3 }}
+        <div class="text-center mt-xl">
+            <a href="/artigos/" class="btn btn--primary">
+                Ver Todos os Artigos
+            </a>
+        </div>
+        {{ end }}
+    </div>
+</section>
+
+<!-- 4. Seção de Destaque de Membros -->
+<section class="members-section">
+    <div class="container">
+        <div class="members-section__header">
+            <h2>Membros Notáveis em Destaque</h2>
+            <p>Conheça os membros que compõem a Sociedade de Vera Cruz</p>
+        </div>
+
+        <!-- Renderiza membros do JSON -->
+        <div class="members-section__grid">
+            {{ $membrosData := .Site.Data.membros }}
+            
+            {{ if $membrosData }}
+                {{ if $membrosData.reitores_e_colaboradores }}
+                    <!-- Estrutura com reitores_e_colaboradores -->
+                    {{ range first 3 $membrosData.reitores_e_colaboradores }}
+                        {{ partial "components/member_card.html" . }}
+                    {{ end }}
+                {{ else }}
+                    <!-- Array direto de membros -->
+                    {{ range first 3 $membrosData }}
+                        {{ partial "components/member_card.html" . }}
+                    {{ end }}
+                {{ end }}
+            {{ else }}
+                <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+                    <p style="color: #666; font-size: 1.125rem;">
+                        👥 Nenhum membro cadastrado ainda.
+                    </p>
+                </div>
+            {{ end }}
+        </div>
+
+        <div class="text-center mt-xl">
+            <a href="/membros/" class="btn btn--secondary btn--large">
+                Ver Todos os Membros →
+            </a>
         </div>
     </div>
 </section>
 
-<!-- 4. Seção de Destaque de Membros (Visualização de cards) -->
-<section class="py-16 bg-white">
-    <div class="container mx-auto">
-        <h2 class="text-3xl font-bold mb-10 text-center text-[#0D3E62]">Membros Notáveis em Destaque</h2>
+<!-- 5. Seção de Destaque com Recursos -->
+<section style="padding: 4rem 0; background: linear-gradient(135deg, #0D3E62 0%, #C3B173 100%); position: relative; overflow: hidden;">
+    <!-- Efeito de ondas de fundo -->
+    <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; 
+                background: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1440 320%22><path fill=%22%23ffffff%22 fill-opacity=%220.1%22 d=%22M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,138.7C960,139,1056,117,1152,106.7C1248,96,1344,96,1392,96L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z%22></path></svg>') no-repeat bottom;
+                background-size: cover;
+                opacity: 0.5;"></div>
+    
+    <div class="container" style="position: relative; z-index: 1;">
+        <div class="grid grid--2-cols" style="align-items: center; gap: 3rem;">
+            <!-- Coluna de Texto -->
+            <div style="color: white;" class="animate-fadeInUp">
+                <h2 style="color: white; font-size: 2.5rem; margin-bottom: 1.5rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">
+                    🎯 Promoção de Conhecimento
+                </h2>
+                <p style="font-size: 1.125rem; line-height: 1.8; margin-bottom: 2rem; opacity: 0.95;">
+                    Nossa missão é promover artigos, estudos e membros notáveis na área de Go e desenvolvimento de software. 
+                    Trabalhamos continuamente para expandir o conhecimento e a comunidade.
+                </p>
+                <a href="/sobre" class="btn btn--secondary btn--large">
+                    Conheça Nossa História
+                </a>
+            </div>
 
-        <!-- Renderiza 3 membros (dados JSON) -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {{ $membros := first 3 ($.Site.Data.membros.reitores_e_colaboradores) }}
-            {{ range $membros }}
-            {{ partial "components/member_card.html" . }}
-            {{ end }}
+            <!-- Coluna de Card -->
+            <div class="animate-fadeInUp" style="animation-delay: 0.2s;">
+                <div class="card card--glass" style="padding: 2rem; backdrop-filter: blur(10px);">
+                    <h3 style="color: #0D3E62; margin-bottom: 1.5rem; font-size: 1.5rem;">
+                        📚 Recursos Disponíveis
+                    </h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 1rem; padding-left: 2rem; position: relative; font-size: 1rem;">
+                            <span style="position: absolute; left: 0; color: #C3B173; font-weight: bold; font-size: 1.25rem;">✓</span>
+                            Artigos técnicos e tutoriais detalhados
+                        </li>
+                        <li style="margin-bottom: 1rem; padding-left: 2rem; position: relative; font-size: 1rem;">
+                            <span style="position: absolute; left: 0; color: #C3B173; font-weight: bold; font-size: 1.25rem;">✓</span>
+                            Estudos aprofundados e análises críticas
+                        </li>
+                        <li style="margin-bottom: 1rem; padding-left: 2rem; position: relative; font-size: 1rem;">
+                            <span style="position: absolute; left: 0; color: #C3B173; font-weight: bold; font-size: 1.25rem;">✓</span>
+                            Documentação completa e atualizada
+                        </li>
+                        <li style="margin-bottom: 1rem; padding-left: 2rem; position: relative; font-size: 1rem;">
+                            <span style="position: absolute; left: 0; color: #C3B173; font-weight: bold; font-size: 1.25rem;">✓</span>
+                            Comunidade ativa e colaborativa
+                        </li>
+                    </ul>
+                    <a href="/documentos" class="btn btn--primary btn--small" style="margin-top: 1.5rem; width: 100%;">
+                        Explorar Documentação
+                    </a>
+                </div>
+            </div>
         </div>
+    </div>
+</section>
 
-        <div class="text-center mt-12">
-            <a href="/membros/" class="text-[#0D3E62] font-semibold hover:underline transition duration-300 text-lg">
-                Ver todos os Membros Notáveis →
-            </a>
+<!-- 6. Call to Action Final -->
+<section class="py-16 bg-white">
+    <div class="container">
+        <div class="text-center animate-fadeInUp">
+            <h2 style="font-size: 2.5rem; color: #0D3E62; margin-bottom: 1rem; font-weight: 800;">
+                Junte-se à Sociedade
+            </h2>
+            <p style="font-size: 1.25rem; color: #666; max-width: 600px; margin: 0 auto 2rem;">
+                Faça parte de uma comunidade dedicada ao conhecimento e à excelência
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="/sobre" class="btn btn--primary btn--large">
+                    Saiba Mais Sobre Nós
+                </a>
+                <a href="/membros" class="btn btn--outline btn--large">
+                    Conheça os Membros
+                </a>
+            </div>
         </div>
     </div>
 </section>

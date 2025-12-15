@@ -1,75 +1,859 @@
-/* Variáveis de Branding */
-$primary-color: #0D3E62; /* Azul Marinho/Escuro */
-$secondary-color: #C3B173; /* Dourado/Bege */
-$background-color: #F9F9F9;
-$text-color: #333333;
-$font-stack: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+// =========================================
+// VARIÁVEIS E CONFIGURAÇÕES
+// =========================================
 
-/* Carrega a base do Tailwind */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+// Cores do projeto
+$primary: #0D3E62;
+$secondary: #C3B173;
+$background: #F9F9F9;
+$text: #333333;
+$white: #ffffff;
+$gray-light: #f5f5f5;
+$gray-medium: #e0e0e0;
+$gray-dark: #666666;
+
+// Gradientes modernos
+$gradient-primary: linear-gradient(135deg, $primary 0%, lighten($primary, 15%) 100%);
+$gradient-secondary: linear-gradient(135deg, $secondary 0%, darken($secondary, 10%) 100%);
+$gradient-hero: linear-gradient(135deg, rgba($primary, 0.95) 0%, rgba($secondary, 0.85) 100%);
+
+// Sombras (glassmorphism style)
+$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+$shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+$shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+$shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.20);
+
+// Breakpoints responsivos
+$mobile: 480px;
+$tablet: 768px;
+$desktop: 1024px;
+$wide: 1280px;
+
+// Espaçamentos
+$spacing-xs: 0.5rem;
+$spacing-sm: 1rem;
+$spacing-md: 1.5rem;
+$spacing-lg: 2rem;
+$spacing-xl: 3rem;
+$spacing-2xl: 4rem;
+
+// Transições
+$transition-fast: 0.2s ease-in-out;
+$transition-normal: 0.3s ease-in-out;
+$transition-slow: 0.5s ease-in-out;
+
+// Border radius
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 16px;
+$radius-xl: 24px;
+$radius-full: 9999px;
+
+// =========================================
+// MIXINS ÚTEIS
+// =========================================
+
+@mixin responsive($breakpoint) {
+  @if $breakpoint == mobile {
+    @media (max-width: $mobile) { @content; }
+  } @else if $breakpoint == tablet {
+    @media (max-width: $tablet) { @content; }
+  } @else if $breakpoint == desktop {
+    @media (min-width: $desktop) { @content; }
+  } @else if $breakpoint == wide {
+    @media (min-width: $wide) { @content; }
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin glass-effect {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+@mixin hover-lift {
+  transition: transform $transition-normal, box-shadow $transition-normal;
+  
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: $shadow-xl;
+  }
+}
+
+@mixin gradient-text($gradient) {
+  background: $gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// =========================================
+// RESET E BASE
+// =========================================
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  
+  @include responsive(mobile) {
+    font-size: 14px;
+  }
+}
 
 body {
-    background-color: $background-color;
-    color: $text-color;
-    font-family: $font-stack;
-    line-height: 1.65; /* Melhorar a legibilidade do texto */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.6;
+  color: $text;
+  background-color: $background;
+  overflow-x: hidden;
 }
 
-/* Estilo para Títulos (Mais impactante) */
-h1, h2, h3 {
-    color: $primary-color;
-    font-weight: 700;
-    line-height: 1.2;
+// =========================================
+// TIPOGRAFIA RESPONSIVA
+// =========================================
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: $spacing-md;
+  color: $primary;
 }
 
-/* Estilo para Links e Destaques (Contraste) */
-a {
-    color: $secondary-color;
-    transition: color 0.3s ease;
-    text-decoration: none;
-    &:hover {
-        color: darken($secondary-color, 15%);
-        text-decoration: underline;
-    }
+h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  
+  @include responsive(tablet) {
+    font-size: 2rem;
+  }
 }
 
-/* Base de Container */
+h2 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  
+  @include responsive(tablet) {
+    font-size: 1.75rem;
+  }
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+p {
+  margin-bottom: $spacing-sm;
+  font-size: clamp(1rem, 2vw, 1.125rem);
+}
+
+// =========================================
+// CONTAINER RESPONSIVO
+// =========================================
+
 .container {
-    max-width: 1280px; /* Um pouco mais largo */
+  width: 100%;
+  max-width: $wide;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+  
+  @include responsive(tablet) {
+    padding: 0 $spacing-sm;
+  }
+  
+  &--narrow {
+    max-width: $desktop;
+  }
+  
+  &--wide {
+    max-width: 100%;
+    padding: 0 $spacing-xl;
+  }
+}
+
+// =========================================
+// GRID SYSTEM RESPONSIVO
+// =========================================
+
+.grid {
+  display: grid;
+  gap: $spacing-lg;
+  
+  &--2-cols {
+    grid-template-columns: repeat(2, 1fr);
+    
+    @include responsive(tablet) {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  &--3-cols {
+    grid-template-columns: repeat(3, 1fr);
+    
+    @include responsive(desktop) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    
+    @include responsive(tablet) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: $spacing-md;
+    }
+    
+    @include responsive(mobile) {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  &--4-cols {
+    grid-template-columns: repeat(4, 1fr);
+    
+    @include responsive(desktop) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    
+    @include responsive(tablet) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @include responsive(mobile) {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  &--auto-fit {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    
+    @include responsive(mobile) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+// =========================================
+// HEADER MODERNO COM GLASSMORPHISM
+// =========================================
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  @include glass-effect;
+  box-shadow: $shadow-sm;
+  transition: all $transition-normal;
+  
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-sm $spacing-md;
+    max-width: $wide;
     margin: 0 auto;
-    padding: 0 1.5rem;
+  }
+  
+  &__logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    @include gradient-text($gradient-primary);
+    text-decoration: none;
+    transition: transform $transition-fast;
+    
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+  
+  &__nav {
+    display: flex;
+    gap: $spacing-md;
+    list-style: none;
+    
+    @include responsive(tablet) {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 80%;
+      height: 100vh;
+      background: $white;
+      flex-direction: column;
+      padding: $spacing-2xl $spacing-md;
+      box-shadow: $shadow-xl;
+      transition: right $transition-normal;
+      
+      &.active {
+        right: 0;
+      }
+    }
+  }
+  
+  &__link {
+    color: $text;
+    text-decoration: none;
+    font-weight: 600;
+    position: relative;
+    padding: $spacing-xs $spacing-sm;
+    transition: color $transition-fast;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: $gradient-primary;
+      transition: width $transition-normal, left $transition-normal;
+    }
+    
+    &:hover {
+      color: $primary;
+      
+      &::after {
+        width: 100%;
+        left: 0;
+      }
+    }
+    
+    &--active {
+      color: $primary;
+      
+      &::after {
+        width: 100%;
+        left: 0;
+      }
+    }
+  }
+  
+  &__toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: $spacing-xs;
+    z-index: 1001;
+    
+    @include responsive(tablet) {
+      display: flex;
+    }
+    
+    span {
+      width: 24px;
+      height: 3px;
+      background: $primary;
+      border-radius: $radius-full;
+      transition: all $transition-fast;
+    }
+    
+    &.active {
+      span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      
+      span:nth-child(2) {
+        opacity: 0;
+      }
+      
+      span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+      }
+    }
+  }
 }
 
-/* Componente Customizado: Botão Principal de Artigos */
-.btn-primary {
-    background-color: $primary-color;
-    color: white;
-    border: 2px solid $primary-color;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    transition: all 0.3s;
-    font-weight: 600;
+// =========================================
+// HERO SECTION COM ANIMAÇÃO
+// =========================================
 
-    &:hover {
-        background-color: darken($primary-color, 5%);
-        transform: translateY(-1px);
-    }
+.hero {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  background: $gradient-hero;
+  color: $white;
+  overflow: hidden;
+  padding: $spacing-2xl $spacing-md;
+  
+  @include responsive(tablet) {
+    min-height: 50vh;
+    padding: $spacing-xl $spacing-sm;
+  }
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,138.7C960,139,1056,117,1152,106.7C1248,96,1344,96,1392,96L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+    background-size: cover;
+    animation: wave 10s ease-in-out infinite;
+  }
+  
+  &__content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    animation: fadeInUp 1s ease-out;
+  }
+  
+  &__title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin-bottom: $spacing-md;
+    color: $white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  &__subtitle {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    margin-bottom: $spacing-xl;
+    opacity: 0.95;
+  }
+  
+  &__cta {
+    display: inline-flex;
+    gap: $spacing-md;
+    flex-wrap: wrap;
+  }
 }
 
-/* Componente Customizado: Botão Secundário de Estudos */
-.btn-secondary {
-    background-color: transparent;
-    color: $primary-color;
-    border: 2px solid $primary-color;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    transition: all 0.3s;
-    font-weight: 600;
+// =========================================
+// BOTÕES MODERNOS
+// =========================================
 
+.btn {
+  display: inline-block;
+  padding: $spacing-sm $spacing-lg;
+  border-radius: $radius-full;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  transition: all $transition-normal;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width $transition-normal, height $transition-normal;
+  }
+  
+  &:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+  
+  &--primary {
+    background: $gradient-primary;
+    color: $white;
+    box-shadow: $shadow-md;
+    
     &:hover {
-        background-color: $primary-color;
-        color: white;
+      transform: translateY(-2px);
+      box-shadow: $shadow-lg;
     }
+  }
+  
+  &--secondary {
+    background: transparent;
+    color: $white;
+    border: 2px solid $white;
+    
+    &:hover {
+      background: $white;
+      color: $primary;
+    }
+  }
+  
+  &--outline {
+    background: transparent;
+    color: $primary;
+    border: 2px solid $primary;
+    
+    &:hover {
+      background: $primary;
+      color: $white;
+    }
+  }
+  
+  &--small {
+    padding: $spacing-xs $spacing-md;
+    font-size: 0.875rem;
+  }
+  
+  &--large {
+    padding: $spacing-md $spacing-xl;
+    font-size: 1.125rem;
+  }
+}
+
+// =========================================
+// CARDS MODERNOS COM HOVER EFFECTS
+// =========================================
+
+.card {
+  background: $white;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-sm;
+  transition: all $transition-normal;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba($primary, 0.1), transparent);
+    transition: left 0.5s;
+  }
+  
+  &:hover {
+    @include hover-lift;
+    
+    &::before {
+      left: 100%;
+    }
+  }
+  
+  &__image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: $radius-md;
+    margin-bottom: $spacing-md;
+  }
+  
+  &__title {
+    font-size: 1.5rem;
+    margin-bottom: $spacing-sm;
+    color: $primary;
+  }
+  
+  &__text {
+    color: $gray-dark;
+    margin-bottom: $spacing-md;
+  }
+  
+  &--glass {
+    @include glass-effect;
+  }
+  
+  &--gradient {
+    background: $gradient-primary;
+    color: $white;
+    
+    .card__title {
+      color: $white;
+    }
+  }
+}
+
+// =========================================
+// MEMBER CARD APRIMORADO
+// =========================================
+
+.member-card {
+  background: $white;
+  border-radius: $radius-xl;
+  padding: $spacing-xl;
+  text-align: center;
+  box-shadow: $shadow-md;
+  transition: all $transition-normal;
+  position: relative;
+  overflow: hidden;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba($secondary, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity $transition-slow;
+  }
+  
+  &:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: $shadow-xl;
+    
+    &::after {
+      opacity: 1;
+    }
+    
+    .member-card__image {
+      transform: scale(1.1);
+    }
+  }
+  
+  &__image-wrapper {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto $spacing-md;
+    overflow: hidden;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px $white, 0 0 0 6px $secondary;
+    
+    @include responsive(mobile) {
+      width: 120px;
+      height: 120px;
+    }
+  }
+  
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform $transition-slow;
+  }
+  
+  &__name {
+    font-size: 1.5rem;
+    color: $primary;
+    margin-bottom: $spacing-xs;
+    position: relative;
+    z-index: 1;
+  }
+  
+  &__title {
+    color: $secondary;
+    font-style: italic;
+    margin-bottom: $spacing-md;
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+  }
+  
+  &__bio {
+    color: $gray-dark;
+    margin-bottom: $spacing-lg;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+  }
+  
+  &__link {
+    display: inline-block;
+    padding: $spacing-xs $spacing-md;
+    background: transparent;
+    color: $primary;
+    border: 2px solid $primary;
+    border-radius: $radius-full;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all $transition-fast;
+    position: relative;
+    z-index: 1;
+    
+    &:hover {
+      background: $primary;
+      color: $white;
+      transform: scale(1.05);
+    }
+  }
+}
+
+// =========================================
+// SEÇÃO DE MEMBROS
+// =========================================
+
+.members-section {
+  padding: $spacing-2xl 0;
+  background: linear-gradient(180deg, $background 0%, $white 100%);
+  
+  &__header {
+    text-align: center;
+    margin-bottom: $spacing-xl;
+    
+    h2 {
+      @include gradient-text($gradient-primary);
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: $spacing-sm;
+    }
+    
+    p {
+      color: $gray-dark;
+      font-size: 1.125rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  }
+  
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: $spacing-xl;
+    
+    @include responsive(mobile) {
+      grid-template-columns: 1fr;
+      gap: $spacing-md;
+    }
+  }
+}
+
+// =========================================
+// FOOTER MODERNO
+// =========================================
+
+.footer {
+  background: $primary;
+  color: $white;
+  padding: $spacing-2xl 0 $spacing-md;
+  margin-top: $spacing-2xl;
+  
+  &__content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: $spacing-xl;
+    margin-bottom: $spacing-xl;
+    
+    @include responsive(tablet) {
+      grid-template-columns: 1fr;
+      gap: $spacing-lg;
+    }
+  }
+  
+  &__section {
+    h4 {
+      color: $secondary;
+      margin-bottom: $spacing-md;
+      font-size: 1.25rem;
+    }
+    
+    p, a {
+      color: rgba($white, 0.8);
+      text-decoration: none;
+      transition: color $transition-fast;
+      
+      &:hover {
+        color: $white;
+      }
+    }
+  }
+  
+  &__bottom {
+    text-align: center;
+    padding-top: $spacing-md;
+    border-top: 1px solid rgba($white, 0.2);
+    color: rgba($white, 0.7);
+  }
+}
+
+// =========================================
+// ANIMAÇÕES
+// =========================================
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes wave {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+// Classes de animação
+.animate-fadeInUp {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+// =========================================
+// UTILITIES
+// =========================================
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.mt-sm { margin-top: $spacing-sm; }
+.mt-md { margin-top: $spacing-md; }
+.mt-lg { margin-top: $spacing-lg; }
+.mt-xl { margin-top: $spacing-xl; }
+
+.mb-sm { margin-bottom: $spacing-sm; }
+.mb-md { margin-bottom: $spacing-md; }
+.mb-lg { margin-bottom: $spacing-lg; }
+.mb-xl { margin-bottom: $spacing-xl; }
+
+.pt-sm { padding-top: $spacing-sm; }
+.pt-md { padding-top: $spacing-md; }
+.pt-lg { padding-top: $spacing-lg; }
+.pt-xl { padding-top: $spacing-xl; }
+
+.pb-sm { padding-bottom: $spacing-sm; }
+.pb-md { padding-bottom: $spacing-md; }
+.pb-lg { padding-bottom: $spacing-lg; }
+.pb-xl { padding-bottom: $spacing-xl; }
+
+// Responsividade de display
+.hide-mobile {
+  @include responsive(mobile) {
+    display: none !important;
+  }
+}
+
+.hide-tablet {
+  @include responsive(tablet) {
+    display: none !important;
+  }
+}
+
+.show-mobile {
+  display: none !important;
+  
+  @include responsive(mobile) {
+    display: block !important;
+  }
 }
