@@ -1,21 +1,41 @@
 {{ define "main" }}
-<div class="space-y-12 py-12">
-    <h1 class="text-4xl text-center mb-10 text-gray-800 font-bold">Membros Notáveis</h1>
-    <p class="text-center max-w-3xl mx-auto text-lg text-gray-600">
-        Conheça os acadêmicos e especialistas que impulsionam a missão da Sociedade de Vera Cruz.
-    </p>
+<section class="section-full section-full--sober" style="min-height: 80vh; padding-top: 4rem;">
+    <div class="container relative z-10">
+        <div class="text-center mb-xl animate-fadeInUp">
+            <h1 class="text-5xl font-extrabold mb-4"
+                style="color: #C3B173; font-family: 'Times New Roman', serif; letter-spacing: 0.05em;">
+                Membros Notáveis
+            </h1>
+            <p class="text-xl max-w-3xl mx-auto" style="color: #a8a29e; font-style: italic;">
+                Conheça os acadêmicos e especialistas que impulsionam a missão da Sociedade de Vera Cruz.
+            </p>
+        </div>
 
-    <!-- Grade que irá exibir os cards dos membros -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 mx-auto max-w-6xl">
-        {{ $membros := .Site.Data.membros.reitores_e_colaboradores }}
-        
-        {{ if $membros }}
-            {{ range $membros }}
-                {{ partial "components/member_card.html" . }}
+        <!-- Grade que exibe os cards dos membros -->
+        <div class="grid grid--3-cols" style="column-gap: 2rem; row-gap: 3rem;">
+            {{ $membrosData := .Site.Data.membros }}
+
+            {{ if $membrosData }}
+            {{ if $membrosData.reitores_e_colaboradores }}
+            <!-- Estrutura com reitores_e_colaboradores -->
+            {{ range $membrosData.reitores_e_colaboradores }}
+            {{ partial "components/member_card.html" . }}
             {{ end }}
-        {{ else }}
-            <p class="text-center text-gray-500 col-span-full">Nenhum membro notável cadastrado ainda em data/membros.json.</p>
-        {{ end }}
+            {{ else if reflect.IsSlice $membrosData }}
+            <!-- Array direto de membros -->
+            {{ range $membrosData }}
+            {{ partial "components/member_card.html" . }}
+            {{ end }}
+            {{ end }}
+            {{ else }}
+            <div
+                style="grid-column: 1 / -1; text-align: center; padding: 3rem; background: rgba(0,0,0,0.2); border: 1px dashed #444;">
+                <p style="color: #a8a29e; font-size: 1.125rem;">
+                    Nenhum membro notável cadastrado ainda em data/membros.json.
+                </p>
+            </div>
+            {{ end }}
+        </div>
     </div>
-</div>
+</section>
 {{ end }}

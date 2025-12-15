@@ -1,0 +1,18 @@
+{{ define "main" }}
+<section class="py-16 pt-24">
+    <div class="container mx-auto px-4 max-w-4xl">
+        <article class="prose prose-invert prose-lg mx-auto">
+            <h1 class="font-bold text-4xl mb-4 text-[#C3B173]" style="font-family: 'Times New Roman', serif;">
+                {{ .Title }}
+            </h1>
+            <div class="text-[#A8A29E] text-sm mb-8 font-mono border-b border-[#333] pb-4">
+                {{ .Date.Format "02 Jan 2006" }} | {{ .ReadingTime }} min de leitura
+            </div>
+
+            <div class="text-[#d6d3d1] leading-relaxed">
+                {{ .Content }}
+            </div>
+        </article>
+    </div>
+</section>
+{{ end }}

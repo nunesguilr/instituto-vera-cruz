@@ -1,17 +1,17 @@
-<header class="bg-[#0D3E62] text-white shadow-lg">
-    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+<header class="header">
+    <div class="header__container">
         <!-- Logotipo/Título do Site -->
-        <a href="/" class="text-2xl font-bold tracking-wider hover:text-[#C3B173] transition duration-300">
+        <a href="/" class="header__logo">
             {{ .Site.Params.brand_name }}
         </a>
 
         <!-- Navegação Principal -->
         <nav>
-            <ul class="flex space-x-6 text-sm font-semibold">
-                <li><a href="/artigos/" class="hover:text-[#C3B173] transition duration-300">Artigos</a></li>
-                <li><a href="/estudos/" class="hover:text-[#C3B173] transition duration-300">Estudos</a></li>
-                <li><a href="/membros/" class="hover:text-[#C3B173] transition duration-300">Membros</a></li>
-                <li><a href="/sobre/" class="hover:text-[#C3B173] transition duration-300">Sobre</a></li>
+            <ul class="header__nav">
+                <li><a href="/artigos/" class="header__link">Artigos</a></li>
+                <li><a href="/estudos/" class="header__link">Estudos</a></li>
+                <li><a href="/membros/" class="header__link">Membros</a></li>
+                <li><a href="/sobre/" class="header__link">Sobre</a></li>
             </ul>
         </nav>
     </div>

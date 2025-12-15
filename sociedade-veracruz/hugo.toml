@@ -10,12 +10,14 @@ disableKinds = ["taxonomy", "term"] # Simplifica o build inicial
     # SLOGAN/DESCRIÇÃO
     tagline = "Promoção de Artigos, Estudos e Membros Notáveis em Go."
     
-    # Cores do Branding
-    color_primary = "#0D3E62" 
-    color_secondary = "#C3B173"
-    color_background = "#F9F9F9" 
-    color_text = "#333333"
+    # Cores do Branding (Refletindo a estética Dark Classic)
+    color_primary = "#8C1C1C" # Deep Red
+    color_secondary = "#C8AA6E" # Antique Gold
+    color_background = "#141210" # Dark Sober
+    color_text = "#E7E5E4" # Off-White
 
 [permalinks]
     artigos = "/artigos/:year/:slug/"
     estudos = "/estudos/:slug/"
+    sobre = "/sobre/"
+    

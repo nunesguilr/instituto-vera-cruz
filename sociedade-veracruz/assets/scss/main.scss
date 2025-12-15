@@ -3,19 +3,45 @@
 // =========================================
 
 // Cores do projeto
-$primary: #0D3E62;
-$secondary: #C3B173;
-$background: #F9F9F9;
-$text: #333333;
+$primary: #8C1C1C;
+
+// Cor Secundária: Ouro Envelhecido / Mostarda
+// Usado para: Bordas finas, divisores, ícones e detalhes nobres.
+$secondary: #C8AA6E; // Slightly softer, more "antique" gold
+
+// Cor de Fundo: Pergaminho (Off-White Quente)
+// Usado para: O fundo principal do site. Evita o branco puro para não cansar a vista.
+$background: #FDFBF7;
+
+// Cor de Texto: Sépia Escuro / Tinta Ferrogálica (Substitui o Preto/Cinza)
+// Usado para: Todo o corpo de texto e títulos. É mais suave e histórico que #000000.
+$text: #3D2B1F;
+
+// --- Neutros e Auxiliares (Ajustados para tons quentes) ---
+
 $white: #ffffff;
-$gray-light: #f5f5f5;
-$gray-medium: #e0e0e0;
-$gray-dark: #666666;
+
+// Cinza Claro (Agora é um "Bege Areia")
+// Usado para: Fundo de cards ou seções alternadas.
+$gray-light: #F2EFE9;
+
+// Cinza Médio (Agora é um "Pedra Calcária")
+// Usado para: Linhas de grade ou bordas inativas.
+$gray-medium: #D6D2C4;
+
+// Cinza Escuro (Agora é um "Marrom Café")
+// Usado para: Legendas, datas ou textos de rodapé.
+$gray-dark: #5C4B41;
+
+// Cor Extra: Floresta Negra (Sober Dark)
+// Usado para: Seções escuras com estética clássica.
+$dark-section: #1f1d1b; // Dark Warm Grey - Sober & Institutional
+$dark-sober: #141210; // Almost Black Warm - Depth without harshness
 
 // Gradientes modernos
 $gradient-primary: linear-gradient(135deg, $primary 0%, lighten($primary, 15%) 100%);
 $gradient-secondary: linear-gradient(135deg, $secondary 0%, darken($secondary, 10%) 100%);
-$gradient-hero: linear-gradient(135deg, rgba($primary, 0.95) 0%, rgba($secondary, 0.85) 100%);
+$gradient-hero: linear-gradient(135deg, rgba(28, 25, 23, 0.95) 0%, rgba(12, 10, 9, 0.95) 100%);
 
 // Sombras (glassmorphism style)
 $shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -34,8 +60,9 @@ $spacing-xs: 0.5rem;
 $spacing-sm: 1rem;
 $spacing-md: 1.5rem;
 $spacing-lg: 2rem;
-$spacing-xl: 3rem;
-$spacing-2xl: 4rem;
+$spacing-xl: 4rem;
+$spacing-2xl: 6rem;
+$spacing-3xl: 8rem;
 
 // Transições
 $transition-fast: 0.2s ease-in-out;
@@ -54,14 +81,28 @@ $radius-full: 9999px;
 // =========================================
 
 @mixin responsive($breakpoint) {
-  @if $breakpoint == mobile {
-    @media (max-width: $mobile) { @content; }
-  } @else if $breakpoint == tablet {
-    @media (max-width: $tablet) { @content; }
-  } @else if $breakpoint == desktop {
-    @media (min-width: $desktop) { @content; }
-  } @else if $breakpoint == wide {
-    @media (min-width: $wide) { @content; }
+  @if $breakpoint ==mobile {
+    @media (max-width: $mobile) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint ==tablet {
+    @media (max-width: $tablet) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint ==desktop {
+    @media (min-width: $desktop) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint ==wide {
+    @media (min-width: $wide) {
+      @content;
+    }
   }
 }
 
@@ -72,15 +113,15 @@ $radius-full: 9999px;
 }
 
 @mixin glass-effect {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(20, 18, 16, 0.85); // Dark Sober Glass
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba($secondary, 0.1);
 }
 
 @mixin hover-lift {
   transition: transform $transition-normal, box-shadow $transition-normal;
-  
+
   &:hover {
     transform: translateY(-8px);
     box-shadow: $shadow-xl;
@@ -98,7 +139,9 @@ $radius-full: 9999px;
 // RESET E BASE
 // =========================================
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -107,7 +150,7 @@ $radius-full: 9999px;
 html {
   scroll-behavior: smooth;
   font-size: 16px;
-  
+
   @include responsive(mobile) {
     font-size: 14px;
   }
@@ -125,7 +168,12 @@ body {
 // TIPOGRAFIA RESPONSIVA
 // =========================================
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: $spacing-md;
@@ -134,7 +182,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   font-size: clamp(2rem, 5vw, 3.5rem);
-  
+
   @include responsive(tablet) {
     font-size: 2rem;
   }
@@ -142,7 +190,7 @@ h1 {
 
 h2 {
   font-size: clamp(1.75rem, 4vw, 2.5rem);
-  
+
   @include responsive(tablet) {
     font-size: 1.75rem;
   }
@@ -166,18 +214,36 @@ p {
   max-width: $wide;
   margin: 0 auto;
   padding: 0 $spacing-md;
-  
+
   @include responsive(tablet) {
     padding: 0 $spacing-sm;
   }
-  
+
   &--narrow {
     max-width: $desktop;
   }
-  
+
   &--wide {
     max-width: 100%;
     padding: 0 $spacing-xl;
+  }
+}
+
+// Classe para seções full-width
+.section-full {
+  width: 100%;
+  padding: $spacing-3xl 0; // Much larger padding for institutional feel
+
+  &--dark {
+    background-color: $dark-section;
+    color: #E7E5E4;
+    // No borders, just solid block color for stability
+  }
+
+  &--sober {
+    background-color: $dark-sober;
+    color: #E7E5E4;
+    // Removed gradient overlay for a flatter, more solid institutional look
   }
 }
 
@@ -188,51 +254,51 @@ p {
 .grid {
   display: grid;
   gap: $spacing-lg;
-  
+
   &--2-cols {
     grid-template-columns: repeat(2, 1fr);
-    
+
     @include responsive(tablet) {
       grid-template-columns: 1fr;
     }
   }
-  
+
   &--3-cols {
     grid-template-columns: repeat(3, 1fr);
-    
+
     @include responsive(desktop) {
       grid-template-columns: repeat(3, 1fr);
     }
-    
+
     @include responsive(tablet) {
       grid-template-columns: repeat(2, 1fr);
       gap: $spacing-md;
     }
-    
+
     @include responsive(mobile) {
       grid-template-columns: 1fr;
     }
   }
-  
+
   &--4-cols {
     grid-template-columns: repeat(4, 1fr);
-    
+
     @include responsive(desktop) {
       grid-template-columns: repeat(3, 1fr);
     }
-    
+
     @include responsive(tablet) {
       grid-template-columns: repeat(2, 1fr);
     }
-    
+
     @include responsive(mobile) {
       grid-template-columns: 1fr;
     }
   }
-  
+
   &--auto-fit {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    
+
     @include responsive(mobile) {
       grid-template-columns: 1fr;
     }
@@ -248,9 +314,8 @@ p {
   top: 0;
   z-index: 1000;
   @include glass-effect;
-  box-shadow: $shadow-sm;
   transition: all $transition-normal;
-  
+
   &__container {
     display: flex;
     align-items: center;
@@ -259,117 +324,52 @@ p {
     max-width: $wide;
     margin: 0 auto;
   }
-  
+
   &__logo {
     font-size: 1.5rem;
-    font-weight: 800;
-    @include gradient-text($gradient-primary);
+    font-weight: 700;
+    font-family: 'Times New Roman', serif; // Classic serif signature
+    color: #E7E5E4;
     text-decoration: none;
-    transition: transform $transition-fast;
-    
+    letter-spacing: 0.05em;
+    transition: color $transition-fast;
+
     &:hover {
-      transform: scale(1.05);
+      color: $secondary;
     }
   }
-  
+
   &__nav {
     display: flex;
     gap: $spacing-md;
     list-style: none;
-    
+
     @include responsive(tablet) {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 80%;
-      height: 100vh;
-      background: $white;
-      flex-direction: column;
-      padding: $spacing-2xl $spacing-md;
-      box-shadow: $shadow-xl;
-      transition: right $transition-normal;
-      
-      &.active {
-        right: 0;
-      }
+      display: none; // Hiding for now, would typically toggle
     }
   }
-  
+
   &__link {
-    color: $text;
+    color: #A8A29E; // Muted text for subtle look
     text-decoration: none;
-    font-weight: 600;
-    position: relative;
+    font-weight: 500;
+    font-size: 0.95rem;
     padding: $spacing-xs $spacing-sm;
     transition: color $transition-fast;
-    
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 0;
-      height: 2px;
-      background: $gradient-primary;
-      transition: width $transition-normal, left $transition-normal;
-    }
-    
+    font-family: 'Times New Roman', serif;
+    letter-spacing: 0.02em;
+
     &:hover {
-      color: $primary;
-      
-      &::after {
-        width: 100%;
-        left: 0;
-      }
+      color: $secondary; // Glows gold on hover
     }
-    
+
     &--active {
-      color: $primary;
-      
-      &::after {
-        width: 100%;
-        left: 0;
-      }
-    }
-  }
-  
-  &__toggle {
-    display: none;
-    flex-direction: column;
-    gap: 4px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: $spacing-xs;
-    z-index: 1001;
-    
-    @include responsive(tablet) {
-      display: flex;
-    }
-    
-    span {
-      width: 24px;
-      height: 3px;
-      background: $primary;
-      border-radius: $radius-full;
-      transition: all $transition-fast;
-    }
-    
-    &.active {
-      span:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px);
-      }
-      
-      span:nth-child(2) {
-        opacity: 0;
-      }
-      
-      span:nth-child(3) {
-        transform: rotate(-45deg) translate(5px, -5px);
-      }
+      color: $secondary;
     }
   }
 }
+
+
 
 // =========================================
 // HERO SECTION COM ANIMAÇÃO
@@ -377,53 +377,64 @@ p {
 
 .hero {
   position: relative;
-  min-height: 70vh;
+  min-height: 80vh; // Taller hero for impact
   display: flex;
   align-items: center;
-  background: $gradient-hero;
-  color: $white;
+  justify-content: center;
+  // Background will be set via inline style or separate element in HTML
+  // But we provide a fallback color
+  background-color: $dark-section;
+  color: #E7E5E4; // Off-white text
   overflow: hidden;
   padding: $spacing-2xl $spacing-md;
-  
+
   @include responsive(tablet) {
-    min-height: 50vh;
+    min-height: 60vh;
     padding: $spacing-xl $spacing-sm;
   }
-  
-  &::before {
+
+  // Overlay for text readability
+  &::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,138.7C960,139,1056,117,1152,106.7C1248,96,1344,96,1392,96L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
-    background-size: cover;
-    animation: wave 10s ease-in-out infinite;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%);
+    z-index: 0;
   }
-  
+
   &__content {
     position: relative;
-    z-index: 1;
-    max-width: 800px;
-    animation: fadeInUp 1s ease-out;
+    z-index: 10; // Above overlay
+    max-width: 900px;
+    text-align: center;
+    animation: fadeInUp 1.2s ease-out;
   }
-  
+
   &__title {
-    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-family: 'Times New Roman', serif;
+    font-size: clamp(3rem, 7vw, 5rem); // Larger title
     margin-bottom: $spacing-md;
-    color: $white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    color: #F5F5F4;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   }
-  
+
   &__subtitle {
-    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
     margin-bottom: $spacing-xl;
-    opacity: 0.95;
+    color: rgba(231, 229, 228, 0.9);
+    font-weight: 400;
+    font-style: italic; // Classic touch
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
   }
-  
+
   &__cta {
-    display: inline-flex;
+    display: flex;
+    justify-content: center;
     gap: $spacing-md;
     flex-wrap: wrap;
   }
@@ -445,7 +456,7 @@ p {
   transition: all $transition-normal;
   position: relative;
   overflow: hidden;
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -458,50 +469,50 @@ p {
     transform: translate(-50%, -50%);
     transition: width $transition-normal, height $transition-normal;
   }
-  
+
   &:hover::before {
     width: 300px;
     height: 300px;
   }
-  
+
   &--primary {
     background: $gradient-primary;
     color: $white;
     box-shadow: $shadow-md;
-    
+
     &:hover {
       transform: translateY(-2px);
       box-shadow: $shadow-lg;
     }
   }
-  
+
   &--secondary {
     background: transparent;
     color: $white;
     border: 2px solid $white;
-    
+
     &:hover {
       background: $white;
       color: $primary;
     }
   }
-  
+
   &--outline {
     background: transparent;
     color: $primary;
-    border: 2px solid $primary;
-    
+    border: 1px solid $primary;
+
     &:hover {
       background: $primary;
       color: $white;
     }
   }
-  
+
   &--small {
     padding: $spacing-xs $spacing-md;
     font-size: 0.875rem;
   }
-  
+
   &--large {
     padding: $spacing-md $spacing-xl;
     font-size: 1.125rem;
@@ -520,7 +531,7 @@ p {
   transition: all $transition-normal;
   position: relative;
   overflow: hidden;
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -531,15 +542,15 @@ p {
     background: linear-gradient(90deg, transparent, rgba($primary, 0.1), transparent);
     transition: left 0.5s;
   }
-  
+
   &:hover {
     @include hover-lift;
-    
+
     &::before {
       left: 100%;
     }
   }
-  
+
   &__image {
     width: 100%;
     height: 200px;
@@ -547,26 +558,40 @@ p {
     border-radius: $radius-md;
     margin-bottom: $spacing-md;
   }
-  
+
   &__title {
     font-size: 1.5rem;
     margin-bottom: $spacing-sm;
     color: $primary;
   }
-  
+
   &__text {
     color: $gray-dark;
     margin-bottom: $spacing-md;
   }
-  
+
+  &--dark {
+    background: lighten($dark-sober, 3%); // Slightly lighter than bg for contrast without border
+    border: 1px solid rgba($secondary, 0.1); // Very subtle border definition
+    box-shadow: none; // Flat look for institutional feel
+
+    .card__title {
+      color: $secondary;
+    }
+
+    .card__text {
+      color: #A8A29E;
+    }
+  }
+
   &--glass {
     @include glass-effect;
   }
-  
+
   &--gradient {
     background: $gradient-primary;
     color: $white;
-    
+
     .card__title {
       color: $white;
     }
@@ -577,106 +602,107 @@ p {
 // MEMBER CARD APRIMORADO
 // =========================================
 
+@mixin classic-border {
+  border: 1px solid rgba($secondary, 0.2);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+}
+
 .member-card {
-  background: $white;
-  border-radius: $radius-xl;
-  padding: $spacing-xl;
+  background: rgba(26, 22, 20, 0.6); // Dark semi-transparent
+  backdrop-filter: blur(5px); // Subtle glass
+  border-radius: 4px; // Sharp, classic corners (slight round)
+  padding: $spacing-lg;
   text-align: center;
-  box-shadow: $shadow-md;
   transition: all $transition-normal;
   position: relative;
   overflow: hidden;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba($secondary, 0.1) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity $transition-slow;
-  }
-  
+  @include classic-border;
+
   &:hover {
-    transform: translateY(-12px) scale(1.02);
-    box-shadow: $shadow-xl;
-    
-    &::after {
-      opacity: 1;
-    }
-    
+    transform: translateY(-5px);
+    background: rgba(26, 22, 20, 0.8);
+    border-color: rgba($secondary, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+
     .member-card__image {
-      transform: scale(1.1);
+      transform: scale(1.05);
+      filter: grayscale(0%); // Color on hover
     }
   }
-  
+
   &__image-wrapper {
     position: relative;
-    width: 150px;
-    height: 150px;
+    width: 100%;
+    aspect-ratio: 3/4; // Classic portrait ratio
     margin: 0 auto $spacing-md;
     overflow: hidden;
-    border-radius: 50%;
-    box-shadow: 0 0 0 4px $white, 0 0 0 6px $secondary;
-    
-    @include responsive(mobile) {
-      width: 120px;
-      height: 120px;
-    }
+    border-radius: 2px;
+    border-bottom: 3px solid $secondary; // Gold accent bottom
+    background: #000;
   }
-  
+
   &__image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform $transition-slow;
+    transition: all 0.6s ease;
+    filter: grayscale(100%) sepia(20%); // Classic vintage look by default
   }
-  
+
   &__name {
+    font-family: 'Times New Roman', serif;
     font-size: 1.5rem;
-    color: $primary;
-    margin-bottom: $spacing-xs;
+    color: #E7E5E4; // Off-white
+    margin-bottom: 0.25rem;
     position: relative;
     z-index: 1;
+    letter-spacing: 0.02em;
   }
-  
+
   &__title {
     color: $secondary;
-    font-style: italic;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
     margin-bottom: $spacing-md;
-    font-weight: 600;
+    font-weight: 500;
     position: relative;
     z-index: 1;
   }
-  
+
   &__bio {
-    color: $gray-dark;
+    color: #A8A29E;
+    font-size: 0.95rem;
     margin-bottom: $spacing-lg;
     line-height: 1.6;
     position: relative;
     z-index: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
-  
+
   &__link {
     display: inline-block;
     padding: $spacing-xs $spacing-md;
     background: transparent;
-    color: $primary;
-    border: 2px solid $primary;
-    border-radius: $radius-full;
+    color: $secondary;
+    border: 1px solid rgba($secondary, 0.3);
+    border-radius: 2px; // Classic boxy link
     text-decoration: none;
-    font-weight: 600;
-    font-size: 0.875rem;
+    font-weight: 500;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     transition: all $transition-fast;
     position: relative;
     z-index: 1;
-    
+
     &:hover {
-      background: $primary;
-      color: $white;
-      transform: scale(1.05);
+      background: rgba($secondary, 0.1);
+      border-color: $secondary;
+      color: #fff;
     }
   }
 }
@@ -687,31 +713,34 @@ p {
 
 .members-section {
   padding: $spacing-2xl 0;
-  background: linear-gradient(180deg, $background 0%, $white 100%);
-  
+  // Dark subtle radial gradient for depth
+  background: radial-gradient(circle at center, lighten($dark-sober, 5%) 0%, $dark-sober 100%);
+  position: relative; // Ensure z-index works if needed
+
   &__header {
     text-align: center;
     margin-bottom: $spacing-xl;
-    
+
     h2 {
-      @include gradient-text($gradient-primary);
+      color: $secondary; // Gold for title
+      font-family: 'Times New Roman', serif;
       font-size: clamp(2rem, 5vw, 3rem);
       margin-bottom: $spacing-sm;
     }
-    
+
     p {
-      color: $gray-dark;
+      color: #A8A29E; // Light grey for subtitle
       font-size: 1.125rem;
       max-width: 600px;
       margin: 0 auto;
     }
   }
-  
+
   &__grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: $spacing-xl;
-    
+
     @include responsive(mobile) {
       grid-template-columns: 1fr;
       gap: $spacing-md;
@@ -728,37 +757,38 @@ p {
   color: $white;
   padding: $spacing-2xl 0 $spacing-md;
   margin-top: $spacing-2xl;
-  
+
   &__content {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: $spacing-xl;
     margin-bottom: $spacing-xl;
-    
+
     @include responsive(tablet) {
       grid-template-columns: 1fr;
       gap: $spacing-lg;
     }
   }
-  
+
   &__section {
     h4 {
       color: $secondary;
       margin-bottom: $spacing-md;
       font-size: 1.25rem;
     }
-    
-    p, a {
+
+    p,
+    a {
       color: rgba($white, 0.8);
       text-decoration: none;
       transition: color $transition-fast;
-      
+
       &:hover {
         color: $white;
       }
     }
   }
-  
+
   &__bottom {
     text-align: center;
     padding-top: $spacing-md;
@@ -776,6 +806,7 @@ p {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -783,18 +814,24 @@ p {
 }
 
 @keyframes wave {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-20px);
   }
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.5;
   }
@@ -813,29 +850,81 @@ p {
 // UTILITIES
 // =========================================
 
-.text-center { text-align: center; }
-.text-left { text-align: left; }
-.text-right { text-align: right; }
+.text-center {
+  text-align: center;
+}
 
-.mt-sm { margin-top: $spacing-sm; }
-.mt-md { margin-top: $spacing-md; }
-.mt-lg { margin-top: $spacing-lg; }
-.mt-xl { margin-top: $spacing-xl; }
+.text-left {
+  text-align: left;
+}
 
-.mb-sm { margin-bottom: $spacing-sm; }
-.mb-md { margin-bottom: $spacing-md; }
-.mb-lg { margin-bottom: $spacing-lg; }
-.mb-xl { margin-bottom: $spacing-xl; }
+.text-right {
+  text-align: right;
+}
 
-.pt-sm { padding-top: $spacing-sm; }
-.pt-md { padding-top: $spacing-md; }
-.pt-lg { padding-top: $spacing-lg; }
-.pt-xl { padding-top: $spacing-xl; }
+.mt-sm {
+  margin-top: $spacing-sm;
+}
 
-.pb-sm { padding-bottom: $spacing-sm; }
-.pb-md { padding-bottom: $spacing-md; }
-.pb-lg { padding-bottom: $spacing-lg; }
-.pb-xl { padding-bottom: $spacing-xl; }
+.mt-md {
+  margin-top: $spacing-md;
+}
+
+.mt-lg {
+  margin-top: $spacing-lg;
+}
+
+.mt-xl {
+  margin-top: $spacing-xl;
+}
+
+.mb-sm {
+  margin-bottom: $spacing-sm;
+}
+
+.mb-md {
+  margin-bottom: $spacing-md;
+}
+
+.mb-lg {
+  margin-bottom: $spacing-lg;
+}
+
+.mb-xl {
+  margin-bottom: $spacing-xl;
+}
+
+.pt-sm {
+  padding-top: $spacing-sm;
+}
+
+.pt-md {
+  padding-top: $spacing-md;
+}
+
+.pt-lg {
+  padding-top: $spacing-lg;
+}
+
+.pt-xl {
+  padding-top: $spacing-xl;
+}
+
+.pb-sm {
+  padding-bottom: $spacing-sm;
+}
+
+.pb-md {
+  padding-bottom: $spacing-md;
+}
+
+.pb-lg {
+  padding-bottom: $spacing-lg;
+}
+
+.pb-xl {
+  padding-bottom: $spacing-xl;
+}
 
 // Responsividade de display
 .hide-mobile {
@@ -852,7 +941,7 @@ p {
 
 .show-mobile {
   display: none !important;
-  
+
   @include responsive(mobile) {
     display: block !important;
   }

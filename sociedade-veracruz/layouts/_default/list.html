@@ -1,0 +1,37 @@
+{{ define "main" }}
+<section class="py-16 pt-24">
+    <div class="container mx-auto px-4">
+        <header class="text-center mb-16">
+            <h1 class="text-5xl font-extrabold mb-4 text-[#C3B173]" style="font-family: 'Times New Roman', serif;">
+                {{ .Title }}
+            </h1>
+            {{ if .Content }}
+            <div class="max-w-3xl mx-auto text-[#A8A29E] prose prose-invert">
+                {{ .Content }}
+            </div>
+            {{ end }}
+        </header>
+
+        <div class="grid grid--3-cols gap-8">
+            {{ range .Pages }}
+            <article class="card card--dark animate-fadeInUp">
+                <h2 class="card__title h3">
+                    <a href="{{ .Permalink }}" class="no-underline hover:text-[#C8AA6E] transition-colors">
+                        {{ .Title }}
+                    </a>
+                </h2>
+                <div class="text-sm text-[#5C4B41] mb-4">
+                    {{ .Date.Format "02 Jan 2006" }}
+                </div>
+                <p class="card__text mb-4">
+                    {{ .Summary | truncate 150 }}
+                </p>
+                <a href="{{ .Permalink }}" class="btn btn--outline btn--small">Ler Mais →</a>
+            </article>
+            {{ else }}
+            <p class="col-span-full text-center text-[#A8A29E]">Nenhum conteúdo encontrado nesta seção.</p>
+            {{ end }}
+        </div>
+    </div>
+</section>
+{{ end }}
