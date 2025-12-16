@@ -2,22 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/sobre/</loc>
-    <lastmod>2025-12-12T17:06:28-03:00</lastmod>
+    <loc>http://localhost:1313/producoes/biblioteca-digital-de-cl%C3%A1ssicos/</loc>
+    <lastmod>2025-12-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/documentos/</loc>
-    <lastmod>2025-12-12T16:06:25-03:00</lastmod>
+    <loc>http://localhost:1313/producoes/curso-online-introdu%C3%A7%C3%A3o-%C3%A0-filosofia-cl%C3%A1ssica/</loc>
+    <lastmod>2025-12-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/estudos/</loc>
-    <lastmod>2025-12-12T16:06:25-03:00</lastmod>
+    <loc>http://localhost:1313/producoes/podcast-di%C3%A1logos-sobre-fundamentos/</loc>
+    <lastmod>2025-12-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/membros/</loc>
-    <lastmod>2025-12-12T16:06:25-03:00</lastmod>
+    <loc>http://localhost:1313/producoes/</loc>
+    <lastmod>2025-12-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/</loc>
-    <lastmod>2025-12-12T16:06:24-03:00</lastmod>
+    <loc>http://localhost:1313/artigos/2025/fundamentos-da-filosofia-cl%C3%A1ssica/</loc>
+    <lastmod>2025-12-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/artigos/</loc>
-    <lastmod>2025-12-12T16:06:24-03:00</lastmod>
+    <loc>http://localhost:1313/artigos/2025/economia-de-livre-mercado-princ%C3%ADpios-e-desafios/</loc>
+    <lastmod>2025-12-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/artigos/2025/cultura-e-civiliza%C3%A7%C3%A3o-ocidental-ra%C3%ADzes-e-identidade/</loc>
+    <lastmod>2025-11-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/artigos/2025/antropologia-e-natureza-humana-uma-perspectiva-cl%C3%A1ssica/</loc>
+    <lastmod>2025-11-20T00:00:00+00:00</lastmod>
   </url>
 </urlset>

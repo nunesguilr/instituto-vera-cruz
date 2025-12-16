@@ -13,10 +13,11 @@ O site foi construído para refletir a solidez e a seriedade da instituição. A
 
 ## 🛠 Tecnologias Utilizadas
 
-*   **[Hugo](https://gohugo.io/):** Gerador de sites estáticos (SSG) rápido e flexível.
+*   **[Hugo](https://gohugo.io/):** Gerador de sites estáticos (SSG) rápido e flexível - **100% estático, sem necessidade de servidor backend**.
 *   **SCSS (Sass):** Pré-processador CSS utilizado para estilização modular.
 *   **HTML5 Semântico:** Estrutura acessível e otimizada para SEO.
 *   **Git:** Controle de versão.
+*   **Dados JSON:** Membros e conteúdo gerenciados através de arquivos estáticos em `data/`.
 
 ## 📂 Estrutura do Projeto
 
@@ -42,27 +43,29 @@ vera-cruz/
 
 ## 🚀 Como Rodar o Projeto
 
-### Pré-requisitos
-1.  Instale o **Git**.
-2.  Instale o **Hugo (Extended Version)** para suporte a SCSS.
-    *   *Windows:* `choco install hugo-extended` ou baixe do GitHub.
-    *   *Mac:* `brew install hugo`.
-    *   *Linux:* `snap install hugo`.
+### Início Rápido
 
-### Passo a Passo
+```bash
+# Clone o repositório
+git clone https://github.com/nunesguilr/instituto-vera-cruz.git
 
-1.  **Clone o repositório:**
-    ```bash
-    git clone https://github.com/nunesguilr/instituto-vera-cruz.git
-    cd vera-cruz/sociedade-veracruz
-    ```
+# Entre na pasta do site
+cd instituto-vera-cruz/sociedade-veracruz
 
-2.  **Inicie o servidor de desenvolvimento:**
-    ```bash
-    hugo server -D
-    ```
-    *   `-D`: Inclui rascunhos (drafts).
-    *   O site estará disponível em `http://localhost:1313`.
+# Inicie o servidor
+hugo server -D
+```
+
+Acesse: **http://localhost:1313**
+
+### 📚 Documentação Completa
+
+Toda a documentação está organizada na pasta **[`docs/`](docs/):**
+
+- **Para iniciantes:** [`docs/TUTORIAL-INICIANTES.md`](docs/TUTORIAL-INICIANTES.md)
+- **Guia rápido:** [`docs/GUIA-RAPIDO.md`](docs/GUIA-RAPIDO.md)
+- **Documentação técnica:** [`docs/AUTOMACAO.md`](docs/AUTOMACAO.md)
+- **Índice completo:** [`docs/INDICE.md`](docs/INDICE.md)
 
 ## 💻 Guia de Desenvolvimento e Contribuição
 
@@ -81,10 +84,29 @@ hugo new artigos/meu-novo-artigo.md
 ```
 Isso criará um arquivo na pasta `content` com o front-matter padrão.
 
+### Gerenciando Membros
+Os membros são gerenciados através do arquivo `data/membros.json`. Para adicionar ou editar membros:
+
+1. Abra o arquivo `sociedade-veracruz/data/membros.json`
+2. Edite o array `reitores_e_colaboradores` seguindo o padrão:
+   ```json
+   {
+     "id": "5",
+     "nome": "Nome do Membro",
+     "titulo": "Cargo ou Especialidade",
+     "biografia_curta": "Breve descrição sobre o membro (máx. 200 caracteres)",
+     "link_externo": "#",
+     "imagem_perfil": "/images/membros/foto.jpg"
+   }
+   ```
+3. As fotos devem ser colocadas em `static/images/membros/`
+4. O Hugo irá automaticamente atualizar a página de membros
+
 ### Padrões de Código
 *   **CSS:** Use unidades relativas (`rem`) em vez de `px` sempre que possível.
 *   **Classes:** Utilize nomes semânticos (BEM leve) e variáveis SASS para cores.
 *   **Imagens:** Coloque imagens na pasta `static/images` e use caminhos absolutos (`/images/foto.jpg`).
+*   **Dados:** Todos os dados dinâmicos devem estar em arquivos JSON na pasta `data/`.
 
 ## 🤝 Contribuindo
 
@@ -95,3 +117,4 @@ Isso criará um arquivo na pasta `content` com o front-matter padrão.
 
 ---
 *Sociedade de Vera Cruz - Ad Veritatem Per Scientiam*
+

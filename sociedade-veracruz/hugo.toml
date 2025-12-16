@@ -18,6 +18,6 @@ disableKinds = ["taxonomy", "term"] # Simplifica o build inicial
 
 [permalinks]
     artigos = "/artigos/:year/:slug/"
-    estudos = "/estudos/:slug/"
+    producoes = "/producoes/:slug/"
     sobre = "/sobre/"
     
